@@ -1,0 +1,48 @@
+/*{
+  "info": {
+    "name": "Tourmates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Destinations",
+      "item": [
+        {"name": "List Destinations","request": {"method": "GET","url": "{{baseUrl}}/destinations"}},
+        {"name": "Create Destination","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"name\": \"Beach Resort\",\n  \"city\": \"Cebu\",\n  \"address\": \"123 Shoreline\",\n  \"details\": \"White sand\",\n  \"category\": \"beach\",\n  \"rating\": 4.5\n}"},"url": "{{baseUrl}}/destinations"}}
+      ]
+    },
+    {
+      "name": "Trips",
+      "item": [
+        {"name": "List Trips","request": {"method": "GET","url": "{{baseUrl}}/trips"}},
+        {"name": "Create Trip","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"title\": \"Weekend Getaway\",\n  \"description\": \"Relax trip\",\n  \"start_date\": \"2025-12-05\",\n  \"end_date\": \"2025-12-07\",\n  \"destination_id\": 1,\n  \"user_id\": null,\n  \"price\": 1999.99,\n  \"category\": \"leisure\"\n}"},"url": "{{baseUrl}}/trips"}}
+      ]
+    },
+    {
+      "name": "Accommodations",
+      "item": [
+        {"name": "List Accommodations","request": {"method": "GET","url": "{{baseUrl}}/accommodations"}},
+        {"name": "Create Accommodation","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"plan_trip_id\": 1,\n  \"destination_id\": 1,\n  \"name\": \"Seaside Inn\",\n  \"address\": \"Bay Area\",\n  \"category\": \"hotel\",\n  \"price\": 1200,\n  \"room_type\": \"Deluxe\",\n  \"contact_number\": 1234567890,\n  \"review\": \"Nice stay\"\n}"},"url": "{{baseUrl}}/accommodations"}}
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {"name": "List Bookings","request": {"method": "GET","url": "{{baseUrl}}/bookings"}},
+        {"name": "Create Booking","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"plan_trip_id\": 1,\n  \"accommodation_id\": 1,\n  \"user_id\": null,\n  \"check_in\": \"2025-12-05\",\n  \"check_out\": \"2025-12-07\",\n  \"number_of_people\": 2,\n  \"price_per_night\": 1200,\n  \"number_of_nights\": 2,\n  \"total_amount\": 2400,\n  \"status\": \"confirmed\"\n}"},"url": "{{baseUrl}}/bookings"}}
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {"name": "List Payment Methods","request": {"method": "GET","url": "{{baseUrl}}/payment-methods"}},
+        {"name": "Create Payment Method","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"booking_id\": 1,\n  \"payment_options\": \"mastercard\"\n}"},"url": "{{baseUrl}}/payment-methods"}},
+        {"name": "Add Card Details","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"user_id\": 1,\n  \"card_name\": \"JOHN DOE\",\n  \"card_number\": \"4242424242424242\",\n  \"expiry_date\": \"12/30\",\n  \"cvv\": \"123\",\n  \"postal_code\": \"8000\",\n  \"payment_id\": 1\n}"},"url": "{{baseUrl}}/payment-card-details"}},
+        {"name": "Add GCash Details","request": {"method": "POST","header": [{"key": "Content-Type","value": "application/json"}],"body": {"mode": "raw","raw": "{\n  \"payment_id\": 1,\n  \"booking_id\": 1,\n  \"gcash_number\": \"09171234567\"\n}"},"url": "{{baseUrl}}/payment-gcash-details"}}
+      ]
+    }
+  ],
+  "variable": [
+    {"key": "baseUrl", "value": "http://localhost:8000/api"}
+  ]
+}*/
