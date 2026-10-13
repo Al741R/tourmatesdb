@@ -19,9 +19,12 @@ class Payment_Card_Details extends Model
         'card_name',
         'card_number',
         'expiry_date',
-        'cvv',
         'postal_code',
         'payment_id',
+    ];
+
+    protected $casts = [
+        'card_number' => 'encrypted', // Automatically encrypt/decrypt card numbers
     ];
 
     public function payment()

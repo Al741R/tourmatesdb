@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('payment_gcash_details', function (Blueprint $table) {
             $table->bigIncrements('payment_gcash_id');
             $table->unsignedBigInteger('payment_id');
-            $table->unsignedBigInteger('booking_id');
             $table->string('gcash_number');
             $table->timestamps();
             $table->softDeletes();
-            $table->foreign('booking_id')->references('booking_id')->on('bookings')->onDelete('cascade');
             $table->foreign('payment_id')->references('payment_id')->on('payment_method')->onDelete('cascade');
         });
     }

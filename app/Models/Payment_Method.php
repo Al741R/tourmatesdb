@@ -20,4 +20,14 @@ class Payment_Method extends Model
     {
         return $this->belongsTo(Booking::class, 'booking_id', 'booking_id');
     }
+
+    public function cardDetails()
+    {
+        return $this->hasOne(Payment_Card_Details::class, 'payment_id', 'payment_id');
+    }
+
+    public function gcashDetails()
+    {
+        return $this->hasOne(Payment_Gcash_Details::class, 'payment_id', 'payment_id');
+    }
 }

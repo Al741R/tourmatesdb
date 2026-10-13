@@ -17,13 +17,20 @@ class BookingRequest extends FormRequest
             'plan_trip_id' => 'required|integer|exists:plan_trips,plan_trip_id',
             'accommodation_id' => 'nullable|integer|exists:accommodations,accommodation_id',
             'user_id' => 'nullable|integer|exists:users,id',
-            'check_in' => 'nullable|date',
-            'check_out' => 'nullable|date|after_or_equal:check_in',
-            'number_of_people' => 'nullable|integer|min:1',
-            'price_per_night' => 'nullable|integer|min:0',
-            'number_of_nights' => 'nullable|integer|min:1',
-            'total_amount' => 'nullable|numeric|min:0',
-            'status' => 'nullable|string|max:100',
+            'check_in' => 'required|date|after_or_equal:today',
+            'check_out' => 'required|date|after_or_equal:check_in',
+            'number_of_people' => 'required|integer|min:1|max:50',
+            'price_per_night' => 'required|integer|min:0|max:1000000',
+            'status' => 'required|string|in:pending,confirmed,cancelled,completed',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'check_in.after_or_equal' => 'Check-in date must be today or a future date.',
+            'check_out.after_or_equal' => 'Check-out date must be after or equal to check-in date.',
+            'status.in' => 'Status must be one of: pending, confirmed, cancelled, completed.',
         ];
     }
 }

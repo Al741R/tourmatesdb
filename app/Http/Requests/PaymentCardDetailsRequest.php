@@ -22,13 +22,21 @@ class PaymentCardDetailsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => ['required', 'integer', 'exists:users,id'],
+            // user_id is now set automatically from auth()->id() in controller
             'card_name' => ['required', 'string', 'max:255'],
-            'card_number' => ['required', 'digits:16'],
-            'expiry_date' => ['required', 'date_format:m/y'],
-            'cvv' => ['required', 'digits:3'],
+            'card_number' => ['required', 'digits_between:13,19'], // Support various card types
+            'expiry_date' => ['required', 'date_format:m/Y'], // MM/YYYY format
             'postal_code' => ['required', 'string', 'max:20'],
             'payment_id' => ['required', 'integer', 'exists:payment_method,payment_id'],
+            // CVV removed - should be processed but never stored
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'card_number.digits_between' => 'Card number must be between 13 and 19 digits.',
+            'expiry_date.date_format' => 'Expiry date must be in MM/YYYY format.',
         ];
     }
 }

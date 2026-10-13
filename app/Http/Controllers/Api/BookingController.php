@@ -11,29 +11,43 @@ class BookingController extends Controller
 {
     public function index()
     {
-        return response()->json(Booking::with(['accommodation','trip','user'])->get());
+        $bookings = Booking::where('user_id', auth('sanctum')->id())
+            ->with(['accommodation','trip','user'])
+            ->get();
+        return response()->json($bookings);
     }
 
     public function show(Booking $booking)
     {
+        if ($booking->user_id !== auth('sanctum')->id()) {
+            abort(403, 'Unauthorized');
+        }
         $booking->load(['accommodation','trip','user']);
         return response()->json($booking);
     }
 
     public function store(BookingRequest $request)
     {
-        $booking = Booking::create($request->validated());
+        $data = $request->validated();
+        $data['user_id'] = auth('sanctum')->id();
+        $booking = Booking::create($data);
         return response()->json($booking, 201);
     }
 
     public function update(BookingRequest $request, Booking $booking)
     {
+        if ($booking->user_id !== auth('sanctum')->id()) {
+            abort(403, 'Unauthorized');
+        }
         $booking->update($request->validated());
         return response()->json($booking);
     }
 
     public function destroy(Booking $booking)
     {
+        if ($booking->user_id !== auth('sanctum')->id()) {
+            abort(403, 'Unauthorized');
+        }
         $booking->delete();
         return response()->json(null, 204);
     }

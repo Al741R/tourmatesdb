@@ -31,7 +31,6 @@ class PaymentCardDetailsSeeder extends Seeder
                 'card_name' => $faker->name(),
                 'card_number' => $faker->creditCardNumber(),
                 'expiry_date' => $faker->creditCardExpirationDateString(),
-                'cvv' => (string) $faker->numberBetween(100, 999),
                 'postal_code' => (string) $faker->numberBetween(1000, 9999),
                 'payment_id' => $paymentId,
                 'created_at' => now(),

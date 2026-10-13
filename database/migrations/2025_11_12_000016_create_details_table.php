@@ -11,9 +11,9 @@ return new class extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->bigIncrements('details_id')->primary();
             $table->unsignedBigInteger('plan_trip_id');
-            $table->unsignedBigInteger('accommodation_id');
-            $table->unsignedBigInteger('itineraries_id');
-            $table->unsignedBigInteger('list_id');
+            $table->unsignedBigInteger('accommodation_id')->nullable();
+            $table->unsignedBigInteger('itineraries_id')->nullable();
+            $table->unsignedBigInteger('list_id')->nullable();
             $table->string('key');
             $table->text('value')->nullable();
             $table->timestamps();

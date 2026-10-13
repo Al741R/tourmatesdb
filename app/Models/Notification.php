@@ -3,12 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Notification extends Model
 {
-protected $primaryKey = 'notification_id';
+    use SoftDeletes;
 
-protected $fillable = [
+    protected $primaryKey = 'notification_id';
+
+    protected $fillable = [
         'user_id',
         'message',
     ];

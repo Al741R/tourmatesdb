@@ -53,4 +53,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'user_id', 'id');
+    }
+
+    public function savedCards()
+    {
+        return $this->hasMany(Payment_Card_Details::class, 'user_id', 'id');
+    }
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'user_id', 'id');
+    }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class, 'user_id', 'id');
+    }
 }

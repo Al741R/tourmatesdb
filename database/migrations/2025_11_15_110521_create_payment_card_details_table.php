@@ -15,9 +15,8 @@ return new class extends Migration
             $table->bigIncrements('payment_card_id');
             $table->unsignedBigInteger('user_id');
             $table->string('card_name');
-            $table->string('card_number');
+            $table->string('card_number'); // Will be encrypted at application level
             $table->string('expiry_date');
-            $table->string('cvv');
             $table->string('postal_code');
             $table->unsignedBigInteger('payment_id');
             $table->timestamps();

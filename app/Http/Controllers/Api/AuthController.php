@@ -15,11 +15,11 @@ class AuthController extends Controller
     public function login(UserRequest $request)
     {
     $credentials = $request->only('email', 'password');
-    $role = $request->input('role');
+    //$role = $request->input('role');
     $user = User::where('email', $credentials['email'])->first();
 
     // If role provided, ensure it matches; otherwise ignore role filter
-    if (!$user || ($role && $user->role !== $role) || !Hash::check($credentials['password'], $user->password)) {
+    if (!$user || !Hash::check($credentials['password'], $user->password)) {
         throw ValidationException::withMessages([
             'email' => 'The provided credentials are incorrect.',
         ]);
@@ -33,7 +33,7 @@ class AuthController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'role' => $user->role,
+               // 'role' => $user->role,
             ],
         ]);
     }
@@ -51,7 +51,7 @@ class AuthController extends Controller
                 'id' => $user->id,
                 'name' => $user->name,
                 'email' => $user->email,
-                'role' => $user->role,
+                //'role' => $user->role,
             ]
         ]);
     }

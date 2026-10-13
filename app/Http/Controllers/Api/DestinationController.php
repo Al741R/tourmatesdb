@@ -14,11 +14,6 @@ class DestinationController extends Controller
         return response()->json(Destination::all());
     }
 
-    public function create(Request $request)
-    {
-        $destination = Destination::create($request->all());
-        return response()->json($destination, 201);
-    }
     public function show(Destination $destination)
     {
         return response()->json($destination);

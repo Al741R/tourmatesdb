@@ -14,7 +14,6 @@ class Payment_Gcash_Details extends Model
 
     protected $fillable = [
         'payment_id',
-        'booking_id',
         'gcash_number',
     ];
 
@@ -23,8 +22,5 @@ class Payment_Gcash_Details extends Model
         return $this->belongsTo(Payment_Method::class, 'payment_id', 'payment_id');
     }
 
-    public function booking()
-    {
-        return $this->belongsTo(Booking::class, 'booking_id', 'booking_id');
-    }
+    // Access booking through payment: $gcashDetails->payment->booking
 }

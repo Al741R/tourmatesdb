@@ -23,8 +23,14 @@ class PaymentGcashDetailRequest extends FormRequest
     {
         return [
             'payment_id' => ['required', 'integer', 'exists:payment_method,payment_id'],
-            'booking_id' => ['required', 'integer', 'exists:bookings,booking_id'],
-            'gcash_number' => ['required', 'string', 'max:15'],
+            'gcash_number' => ['required', 'string', 'regex:/^09\d{9}$/'], // Philippine mobile format: 09XXXXXXXXX
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'gcash_number.regex' => 'GCash number must be a valid Philippine mobile number (09XXXXXXXXX).',
         ];
     }
 }

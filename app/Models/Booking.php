@@ -20,10 +20,10 @@ class Booking extends Model
         'check_out',
         'number_of_people',
         'price_per_night',
-        'number_of_nights',
-        'total_amount',
         'status',
     ];
+
+    protected $appends = ['number_of_nights', 'total_amount'];
 
     public function trip()
     {
@@ -38,5 +38,25 @@ class Booking extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function paymentMethods()
+    {
+        return $this->hasMany(Payment_Method::class, 'booking_id', 'booking_id');
+    }
+
+    // Computed property: number_of_nights (3NF compliant)
+    public function getNumberOfNightsAttribute()
+    {
+        if (!$this->check_in || !$this->check_out) {
+            return 0;
+        }
+        return \Carbon\Carbon::parse($this->check_in)->diffInDays($this->check_out);
+    }
+
+    // Computed property: total_amount (3NF compliant)
+    public function getTotalAmountAttribute()
+    {
+        return $this->price_per_night * $this->number_of_nights;
     }
 }

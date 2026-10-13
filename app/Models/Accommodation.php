@@ -19,7 +19,6 @@ class Accommodation extends Model
         'category',
         'price',
         'room_type',
-        'destination_id',
         'contact_number',
         'review',
         'rating',
@@ -30,8 +29,16 @@ class Accommodation extends Model
         return $this->belongsTo(Trip::class, 'plan_trip_id', 'plan_trip_id');
     }
 
+    // Access destination through trip relationship (3NF compliant)
     public function destination()
     {
-        return $this->belongsTo(Destination::class, 'destination_id', 'destination_id');
+        return $this->hasOneThrough(
+            Destination::class,
+            Trip::class,
+            'plan_trip_id',      // Foreign key on trips table
+            'destination_id',    // Foreign key on destinations table
+            'plan_trip_id',      // Local key on accommodations table
+            'destination_id'     // Local key on trips table
+        );
     }
 }
